@@ -1,0 +1,30 @@
+# Gmail Inbox Memory
+# The agent reads this before every email review and updates it after decisions.
+# Edit manually anytime — preferences take effect on next run.
+
+# ── Senders / domains to ALWAYS keep ─────────────────────────────────────────
+keep:
+  # - pattern: "github.com"
+  #   type: domain
+  #   reason: "GitHub notifications"
+  # - pattern: "stripe.com"
+  #   type: domain
+  #   reason: "Billing"
+
+# ── Senders / subjects to ALWAYS flag for removal ─────────────────────────────
+remove:
+  # - pattern: "linkedin.com"
+  #   type: domain
+  #   reason: "Too much LinkedIn spam"
+  # - pattern: "coupon"
+  #   type: subject_contains
+  #   reason: "Promotional coupon noise"
+
+# ── Past decisions log (agent appends here) ───────────────────────────────────
+decisions: []
+# Entries added by agent look like:
+# - date: "2026-02-23"
+#   action: remove        # keep | remove | unsure
+#   sender: "deals@example.com"
+#   subject: "Weekly deals roundup"
+#   reason: "User confirmed: not relevant"
