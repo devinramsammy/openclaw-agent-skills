@@ -22,19 +22,19 @@ Example:
 
 Use a Python virtual environment when installing packages.
 
-**If `venv` already exists:** just activate it:
+**If `.venv` already exists:** just activate it:
 
 ```bash
 cd skills/smart-lights
-source venv/bin/activate
+source .venv/bin/activate
 ```
 
 **If not:** create it, then activate and install:
 
 ```bash
 cd skills/smart-lights
-python -m venv venv
-source venv/bin/activate
+python -m venv .venv
+source .venv/bin/activate
 pip install -r requirements.txt
 ```
 

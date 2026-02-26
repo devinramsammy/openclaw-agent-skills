@@ -9,7 +9,21 @@ description: Reads and analyzes Gmail inbox with persistent memory. Provides dai
 
 ## Setup (first-time only)
 
+Use a Python virtual environment when installing packages.
+
+**If `.venv` already exists:** just activate it:
+
 ```bash
+cd skills/read-gmail
+source .venv/bin/activate
+```
+
+**If not:** create it, then activate and install:
+
+```bash
+cd skills/read-gmail
+python -m venv .venv
+source .venv/bin/activate
 pip install google-auth-oauthlib google-auth-httplib2 google-api-python-client pyyaml
 ```
 

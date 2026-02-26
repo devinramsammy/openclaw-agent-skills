@@ -16,6 +16,18 @@ Reads and analyzes Gmail
 
 ---
 
+## manage-calendar
+
+Add, schedule, modify, or reschedule events
+
+| File                      | Purpose                              |
+| ------------------------- | ------------------------------------ |
+| `credentials.json`        | OAuth client from Google Cloud       |
+| `token.json`              | Auto-generated on first run          |
+| `scripts/calendar_ops.py` | CLI: list, add, modify, search, free |
+
+---
+
 ## smart-lights
 
 Control Govee lights and plugs (on/off, brightness) via the Govee Open API

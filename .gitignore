@@ -2,3 +2,5 @@
 skills/read-gmail/credentials.json
 skills/read-gmail/token.json
 skills/smart-lights/.env
+skills/manage-calendar/credentials.json
+skills/manage-calendar/token.json
