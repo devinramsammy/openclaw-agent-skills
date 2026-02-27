@@ -37,3 +37,13 @@ Control Govee lights and plugs (on/off, brightness) via the Govee Open API
 | `.env`                    | `GOVEE_API_KEY` — get from [Govee Developer](https://developer.govee.com) |
 | `devices.json`            | Cached device list                                                        |
 | `scripts/govee_client.py` | CLI and Python client                                                     |
+
+---
+
+## sunset-lights
+
+Schedules smart lights to turn on 20 minutes before NYC sunset via an OpenClaw cron job
+
+| File                                | Purpose                                         |
+| ----------------------------------- | ----------------------------------------------- |
+| `scripts/schedule_sunset_lights.py` | Fetches sunset time and registers/refreshes job |

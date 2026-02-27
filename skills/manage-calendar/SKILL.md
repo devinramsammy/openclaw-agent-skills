@@ -1,6 +1,6 @@
 ---
 name: manage-calendar
-description: Use when the user asks to add, create, or schedule an event; modify, change, or reschedule an event; check their schedule or agenda; find free time or availability; or asks when would be a good time to do something.
+description: Manages Google Calendar events — view daily schedule, add/modify/reschedule events, and find free time slots. Use when the user asks to schedule, reschedule, or cancel an event; check their calendar or agenda; find free time or availability; or asks when would be a good time for something.
 ---
 
 # Manage Calendar
@@ -60,7 +60,9 @@ Resolve relative terms from the **today** value you obtained above. Never use ex
 
 ### 4. Run script
 
-All commands run from the workspace root using the `.venv` interpreter:
+All commands run from the workspace root using the `.venv` interpreter.
+
+`credentials.json` must be present in `skills/manage-calendar/`. On first run a browser window opens for OAuth consent — `token.json` is saved automatically after.
 
 **View schedule:**
 
@@ -138,5 +140,4 @@ When recommending times for a specific activity, apply judgment:
 
 - For `modify`, always run `search` first — never guess an event ID
 - If key details are ambiguous (date, time), ask before executing
-- **Date resolution:** Always get **today** by running `date +%Y-%m-%d` (system date). Use that for "today", and derive "tomorrow" and other relative dates from it. Never use conversation context or example years from this document.
 - On `add`/`modify` success, show the confirmed event details

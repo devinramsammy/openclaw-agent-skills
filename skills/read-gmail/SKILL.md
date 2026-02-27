@@ -5,8 +5,6 @@ description: Reads and analyzes Gmail inbox with persistent memory. Provides dai
 
 # Read Gmail
 
-**Never sends, replies, drafts, or modifies emails.**
-
 ## Setup (first-time only)
 
 Use a Python virtual environment when installing packages.
@@ -30,6 +28,17 @@ pip install google-auth-oauthlib google-auth-httplib2 google-api-python-client p
 `credentials.json` must be present in `skills/read-gmail/`. On first run a browser window opens for OAuth consent — `token.json` is saved automatically after.
 
 ## Workflow
+
+Copy this checklist and check off steps as you complete them:
+
+```
+- [ ] 1. Load context (email-interests.md + memory.yml)
+- [ ] 2. Fetch emails
+- [ ] 3. Score each email
+- [ ] 4. Present digest
+- [ ] 5. Ask about uncertain emails (score 3)
+- [ ] 6. Update memory and interests
+```
 
 ### 1. Load context
 
@@ -123,9 +132,7 @@ Examples of things worth appending:
 
 This keeps scoring accuracy improving over time without the user having to manually maintain the file.
 
-## Rules
+## Constraints
 
 - NEVER send, reply, forward, draft, compose, modify labels, mark as read, archive, or delete
-- Always read `email-interests.md` + `memory.yml` first
 - Show unsubscribe links verbatim — never follow them
-- Always offer to update memory after decisions
