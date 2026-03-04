@@ -1,49 +1,25 @@
 # agent-skills
 
-My personal OpenClaw skills.
+My personal agent skills for Cursor.
 
 ---
 
-## read-gmail
+## [read-gmail](skills/read-gmail)
 
-Reads and analyzes Gmail
+Reads and analyzes Gmail.
 
-| File                 | Purpose                        |
-| -------------------- | ------------------------------ |
-| `credentials.json`   | OAuth client from Google Cloud |
-| `token.json`         | Auto-generated on first run    |
-| `email-interests.md` | Your email preferences         |
+## [manage-calendar](skills/manage-calendar)
 
----
+Add, schedule, modify, or reschedule Google Calendar events.
 
-## manage-calendar
+## [smart-lights](skills/smart-lights)
 
-Add, schedule, modify, or reschedule events
+Control Govee lights and plugs (on/off, brightness) via the Govee Open API.
 
-| File                      | Purpose                              |
-| ------------------------- | ------------------------------------ |
-| `credentials.json`        | OAuth client from Google Cloud       |
-| `token.json`              | Auto-generated on first run          |
-| `scripts/calendar_ops.py` | CLI: list, add, modify, search, free |
+## [sunset-lights](skills/sunset-lights)
 
----
+Schedules smart lights to turn on 20 minutes before NYC sunset via a cron job.
 
-## smart-lights
+## [restaurant-health](skills/restaurant-health)
 
-Control Govee lights and plugs (on/off, brightness) via the Govee Open API
-
-| File                      | Purpose                                                                   |
-| ------------------------- | ------------------------------------------------------------------------- |
-| `.env`                    | `GOVEE_API_KEY` — get from [Govee Developer](https://developer.govee.com) |
-| `devices.json`            | Cached device list                                                        |
-| `scripts/govee_client.py` | CLI and Python client                                                     |
-
----
-
-## sunset-lights
-
-Schedules smart lights to turn on 20 minutes before NYC sunset via an OpenClaw cron job
-
-| File                                | Purpose                                         |
-| ----------------------------------- | ----------------------------------------------- |
-| `scripts/schedule_sunset_lights.py` | Fetches sunset time and registers/refreshes job |
+Look up NYC restaurant health inspection grades by name, zipcode, cuisine, or borough.
