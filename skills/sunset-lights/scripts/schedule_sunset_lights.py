@@ -28,7 +28,9 @@ REQUEST_TIMEOUT = 10
 SUNSET_OFFSET_MINUTES = 20
 
 JOB_NAME = "sunset-lights-job"
-SYSTEM_EVENT_TEXT = "Turn on all lights now"
+AGENT_MESSAGE = (
+    "Use the smart-lights skill to turn on all lights on"
+)
 
 
 def fetch_sunset() -> datetime:
@@ -62,11 +64,20 @@ def remove_existing_job() -> None:
         return
 
     try:
-        jobs = json.loads(result.stdout)
+        parsed = json.loads(result.stdout)
     except json.JSONDecodeError:
         return
 
+    if isinstance(parsed, dict):
+        jobs = parsed.get("jobs", [])
+    elif isinstance(parsed, list):
+        jobs = parsed
+    else:
+        jobs = []
+
     for job in jobs:
+        if not isinstance(job, dict):
+            continue
         if job.get("name") == JOB_NAME:
             job_id = job.get("jobId") or job.get("id")
             if job_id:
@@ -75,8 +86,11 @@ def remove_existing_job() -> None:
 
 
 def register_cron_job(trigger_time: datetime) -> None:
-    """Register a one-shot OpenClaw cron job for trigger_time (NYC local, naive)."""
-    # Convert naive NYC local time to UTC ISO 8601 for OpenClaw
+    """Register a one-shot OpenClaw cron job for trigger_time (NYC local, naive).
+
+    Uses an agent-turn payload (not system-event text) so the run executes the
+    light-control action directly instead of posting a reminder.
+    """    # Convert naive NYC local time to UTC ISO 8601 for OpenClaw
     nyc_offset = timedelta(hours=-5)  # EST; Open-Meteo returns standard/local correctly
     trigger_utc = trigger_time.replace(tzinfo=timezone(nyc_offset)).astimezone(timezone.utc)
     at_iso = trigger_utc.strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -87,8 +101,8 @@ def register_cron_job(trigger_time: datetime) -> None:
         "cron", "add",
         "--name", JOB_NAME,
         "--at", at_iso,
-        "--session", "main",
-        "--system-event", SYSTEM_EVENT_TEXT,
+        "--session", "isolated",
+        "--message", AGENT_MESSAGE,
         "--wake", "now",
         "--delete-after-run",
     )
