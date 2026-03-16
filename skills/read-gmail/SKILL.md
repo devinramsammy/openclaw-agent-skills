@@ -12,20 +12,20 @@ Use a Python virtual environment when installing packages.
 **If `.venv` already exists:** just activate it:
 
 ```bash
-cd skills/read-gmail
+cd $HOME/.openclaw/skills/read-gmail
 source .venv/bin/activate
 ```
 
 **If not:** create it, then activate and install:
 
 ```bash
-cd skills/read-gmail
-python -m venv .venv
+cd $HOME/.openclaw/skills/read-gmail
+python3 -m venv .venv
 source .venv/bin/activate
 pip install google-auth-oauthlib google-auth-httplib2 google-api-python-client pyyaml
 ```
 
-`credentials.json` must be present in `skills/read-gmail/`. On first run a browser window opens for OAuth consent — `token.json` is saved automatically after.
+`credentials.json` must be present in `$HOME/.openclaw/skills/read-gmail/`. On first run a browser window opens for OAuth consent — `token.json` is saved automatically after.
 
 ## Workflow
 
@@ -42,7 +42,7 @@ Copy this checklist and check off steps as you complete them:
 
 ### 1. Load context
 
-Read `skills/read-gmail/email-interests.md` and `skills/read-gmail/memory.yml`.
+Read `$HOME/.openclaw/skills/read-gmail/email-interests.md` and `$HOME/.openclaw/skills/read-gmail/memory.yml`.
 
 - `email-interests.md` — Topics user is interested in. Primary lens for scoring.
 - `memory.yml` — `keep`/`remove` rules (match against `from` or `subject`) and past `decisions`.
@@ -50,7 +50,7 @@ Read `skills/read-gmail/email-interests.md` and `skills/read-gmail/memory.yml`.
 ### 2. Fetch emails
 
 ```bash
-python skills/read-gmail/scripts/fetch_emails.py [hours_back]
+python3 $HOME/.openclaw/skills/read-gmail/scripts/fetch_emails.py [hours_back]
 ```
 
 Outputs JSON `emails[]` with: `subject`, `from`, `date`, `snippet`, `preview`, `category`, `unsubscribe_links`, `is_unread`.
@@ -109,14 +109,14 @@ List score-3 emails and ask the user what to do with them so memory can be updat
 
 ```bash
 # One-off decision
-python skills/read-gmail/scripts/update_memory.py \
+python3 $HOME/.openclaw/skills/read-gmail/scripts/update_memory.py \
   --decision '{"action":"remove","sender":"deals@grubhub.com","subject":"$5 off","reason":"not relevant"}'
 
 # Persistent keep rule
-python skills/read-gmail/scripts/update_memory.py --keep "stripe.com" --type domain --reason "Billing"
+python3 $HOME/.openclaw/skills/read-gmail/scripts/update_memory.py --keep "stripe.com" --type domain --reason "Billing"
 
 # Persistent remove rule
-python skills/read-gmail/scripts/update_memory.py --remove "linkedin.com" --type domain --reason "Noise"
+python3 $HOME/.openclaw/skills/read-gmail/scripts/update_memory.py --remove "linkedin.com" --type domain --reason "Noise"
 ```
 
 `remove` decisions are auto-promoted to persistent rules.

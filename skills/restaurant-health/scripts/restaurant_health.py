@@ -4,8 +4,8 @@ Look up NYC restaurant health inspection grades by borough and name.
 Caches borough data locally with a 7-day TTL.
 
 Usage:
-  python restaurant_health.py search <borough> "<name>" [--refresh]
-  python restaurant_health.py list-boroughs
+  python3 restaurant_health.py search <borough> "<name>" [--refresh]
+  python3 restaurant_health.py list-boroughs
 """
 
 import json

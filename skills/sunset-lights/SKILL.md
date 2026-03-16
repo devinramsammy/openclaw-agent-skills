@@ -20,8 +20,8 @@ Runs `schedule_sunset_lights.py` to fetch today's NYC sunset from Open-Meteo, su
 **If not:**
 
 ```bash
-cd skills/sunset-lights
-python -m venv .venv
+cd $HOME/.openclaw/skills/sunset-lights
+python3 -m venv .venv
 source .venv/bin/activate
 pip install requests
 ```
@@ -31,7 +31,7 @@ pip install requests
 Always run this script — do not attempt to toggle lights directly:
 
 ```bash
-skills/sunset-lights/.venv/bin/python skills/sunset-lights/scripts/schedule_sunset_lights.py
+$HOME/.openclaw/skills/sunset-lights/.venv/bin/python3 $HOME/.openclaw/skills/sunset-lights/scripts/schedule_sunset_lights.py
 ```
 
 Removes any existing `sunset-lights-job`, then registers a new one-shot job firing at sunset − 20 min today.

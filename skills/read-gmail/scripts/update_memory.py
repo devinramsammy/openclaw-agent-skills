@@ -3,10 +3,10 @@
 Update memory.yml with new decisions from the agent.
 
 Usage:
-  python update_memory.py --decision '<JSON>'
-  python update_memory.py --keep '<pattern>' --type domain --reason '<reason>'
-  python update_memory.py --remove '<pattern>' --type domain --reason '<reason>'
-  python update_memory.py --context '<new context text>'
+  python3 update_memory.py --decision '<JSON>'
+  python3 update_memory.py --keep '<pattern>' --type domain --reason '<reason>'
+  python3 update_memory.py --remove '<pattern>' --type domain --reason '<reason>'
+  python3 update_memory.py --context '<new context text>'
 
 Decision JSON format:
   {"action": "keep|remove|unsure", "sender": "...", "subject": "...", "reason": "..."}

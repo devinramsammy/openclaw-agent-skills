@@ -12,20 +12,20 @@ Use a Python virtual environment when installing packages.
 **If `.venv` already exists:** just activate it:
 
 ```bash
-cd skills/manage-calendar
+cd $HOME/.openclaw/skills/manage-calendar
 source .venv/bin/activate
 ```
 
 **If not:** create it, then activate and install:
 
 ```bash
-cd skills/manage-calendar
-python -m venv .venv
+cd $HOME/.openclaw/skills/manage-calendar
+python3 -m venv .venv
 source .venv/bin/activate
 pip install google-auth-oauthlib google-auth-httplib2 google-api-python-client
 ```
 
-`credentials.json` must be present in `skills/manage-calendar/`. On first run a browser window opens for OAuth consent — `token.json` is saved automatically after.
+`credentials.json` must be present in `$HOME/.openclaw/skills/manage-calendar/`. On first run a browser window opens for OAuth consent — `token.json` is saved automatically after.
 
 ## Workflow
 
@@ -62,18 +62,18 @@ Resolve relative terms from the **today** value you obtained above. Never use ex
 
 All commands run from the workspace root using the `.venv` interpreter.
 
-`credentials.json` must be present in `skills/manage-calendar/`. On first run a browser window opens for OAuth consent — `token.json` is saved automatically after.
+`credentials.json` must be present in `$HOME/.openclaw/skills/manage-calendar/`. On first run a browser window opens for OAuth consent — `token.json` is saved automatically after.
 
 **View schedule:**
 
 ```bash
-skills/manage-calendar/.venv/bin/python skills/manage-calendar/scripts/calendar_ops.py list --date YYYY-MM-DD [--days N]
+$HOME/.openclaw/skills/manage-calendar/.venv/bin/python3 $HOME/.openclaw/skills/manage-calendar/scripts/calendar_ops.py list --date YYYY-MM-DD [--days N]
 ```
 
 **Add event:**
 
 ```bash
-skills/manage-calendar/.venv/bin/python skills/manage-calendar/scripts/calendar_ops.py add \
+$HOME/.openclaw/skills/manage-calendar/.venv/bin/python3 $HOME/.openclaw/skills/manage-calendar/scripts/calendar_ops.py add \
   --title "Ryan's Birthday Party" \
   --start "YYYY-MM-DDTHH:MM:SS±HH:MM" \
   --end   "YYYY-MM-DDTHH:MM:SS±HH:MM" \
@@ -83,9 +83,9 @@ skills/manage-calendar/.venv/bin/python skills/manage-calendar/scripts/calendar_
 **Modify event** — run `search` first to get the event ID:
 
 ```bash
-skills/manage-calendar/.venv/bin/python skills/manage-calendar/scripts/calendar_ops.py search --query "dentist" [--days 30]
+$HOME/.openclaw/skills/manage-calendar/.venv/bin/python3 $HOME/.openclaw/skills/manage-calendar/scripts/calendar_ops.py search --query "dentist" [--days 30]
 
-skills/manage-calendar/.venv/bin/python skills/manage-calendar/scripts/calendar_ops.py modify \
+$HOME/.openclaw/skills/manage-calendar/.venv/bin/python3 $HOME/.openclaw/skills/manage-calendar/scripts/calendar_ops.py modify \
   --event-id EVENT_ID \
   [--title "..."] [--start "..."] [--end "..."] [--description "..."] [--location "..."]
 ```
@@ -93,7 +93,7 @@ skills/manage-calendar/.venv/bin/python skills/manage-calendar/scripts/calendar_
 **Find free time:**
 
 ```bash
-skills/manage-calendar/.venv/bin/python skills/manage-calendar/scripts/calendar_ops.py free \
+$HOME/.openclaw/skills/manage-calendar/.venv/bin/python3 $HOME/.openclaw/skills/manage-calendar/scripts/calendar_ops.py free \
   --date YYYY-MM-DD \
   --duration 60 \
   [--range-start 06:00] [--range-end 22:00]

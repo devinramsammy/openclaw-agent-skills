@@ -8,6 +8,7 @@ import json
 import subprocess
 import sys
 from datetime import datetime, timezone, timedelta
+from zoneinfo import ZoneInfo
 
 try:
     import requests
@@ -90,9 +91,9 @@ def register_cron_job(trigger_time: datetime) -> None:
 
     Uses an agent-turn payload (not system-event text) so the run executes the
     light-control action directly instead of posting a reminder.
-    """    # Convert naive NYC local time to UTC ISO 8601 for OpenClaw
-    nyc_offset = timedelta(hours=-5)  # EST; Open-Meteo returns standard/local correctly
-    trigger_utc = trigger_time.replace(tzinfo=timezone(nyc_offset)).astimezone(timezone.utc)
+    """
+    nyc = ZoneInfo("America/New_York")
+    trigger_utc = trigger_time.replace(tzinfo=nyc).astimezone(timezone.utc)
     at_iso = trigger_utc.strftime("%Y-%m-%dT%H:%M:%SZ")
 
     remove_existing_job()

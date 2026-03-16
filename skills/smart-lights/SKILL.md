@@ -18,19 +18,19 @@ When reporting control results, respond with **only** a table of devices and the
 
 ## Setup
 
-All commands run from the `skills/smart-lights` directory. Activate the virtual environment first:
+All commands run from the `$HOME/.openclaw/skills/smart-lights` directory. Activate the virtual environment first:
 
 **If `.venv` already exists:**
 
 ```bash
-cd skills/smart-lights && source .venv/bin/activate
+cd $HOME/.openclaw/skills/smart-lights && source .venv/bin/activate
 ```
 
 **If not:**
 
 ```bash
-cd skills/smart-lights
-python -m venv .venv && source .venv/bin/activate
+cd $HOME/.openclaw/skills/smart-lights
+python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
@@ -41,7 +41,7 @@ Device info is cached at `./devices.json`. Each entry has `sku` (model), `device
 **First time or if the user says "regenerate the list":**
 
 ```bash
-python ./scripts/govee_client.py devices > ./devices.json
+python3 ./scripts/govee_client.py devices > ./devices.json
 ```
 
 **All subsequent requests:** read `./devices.json` directly — do **not** call the API again unless asked.
@@ -50,14 +50,14 @@ python ./scripts/govee_client.py devices > ./devices.json
 
 ```bash
 # On/off (lights and plugs)
-python ./scripts/govee_client.py on <sku> <device>
-python ./scripts/govee_client.py off <sku> <device>
+python3 ./scripts/govee_client.py on <sku> <device>
+python3 ./scripts/govee_client.py off <sku> <device>
 
 # Brightness 1–100 (lights only)
-python ./scripts/govee_client.py brightness <sku> <device> <percent>
+python3 ./scripts/govee_client.py brightness <sku> <device> <percent>
 
 # Query current state
-python ./scripts/govee_client.py state <sku> <device>
+python3 ./scripts/govee_client.py state <sku> <device>
 ```
 
 `state` returns current on/off, brightness, etc. in `payload.capabilities[]`.

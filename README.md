@@ -23,3 +23,7 @@ Schedules smart lights to turn on 20 minutes before NYC sunset via a cron job.
 ## [restaurant-health](skills/restaurant-health)
 
 Look up NYC restaurant health inspection grades by name, zipcode, cuisine, or borough.
+
+## [manage-todos](skills/manage-todos)
+
+Add, list, complete, reopen, and delete todos stored in a local SQLite database.

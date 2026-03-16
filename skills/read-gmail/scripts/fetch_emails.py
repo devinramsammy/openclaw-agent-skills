@@ -3,7 +3,7 @@
 Fetch and classify Gmail emails from the past N hours.
 Output: JSON with emails grouped by category.
 
-Usage: python fetch_emails.py [hours_back]
+Usage: python3 fetch_emails.py [hours_back]
 """
 
 import json
