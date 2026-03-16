@@ -27,3 +27,7 @@ Look up NYC restaurant health inspection grades by name, zipcode, cuisine, or bo
 ## [manage-todos](skills/manage-todos)
 
 Add, list, complete, reopen, and delete todos stored in a local SQLite database.
+
+## [restaurant-ratings](skills/restaurant-ratings)
+
+Find restaurants with a 4.5+ Yelp rating by zipcode, city, or address.

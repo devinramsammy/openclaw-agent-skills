@@ -5,3 +5,6 @@ skills/smart-lights/.env
 skills/manage-calendar/credentials.json
 skills/manage-calendar/token.json
 skills/manage-todos/scripts/__pycache__/
+skills/restaurant-ratings/.venv/
+skills/restaurant-ratings/scripts/__pycache__/
+skills/restaurant-ratings/.env

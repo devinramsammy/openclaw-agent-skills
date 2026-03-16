@@ -11,6 +11,8 @@ $HOME/.openclaw/skills/<skill-name>/
 ├── scripts/              # Executable scripts the agent runs
 │   └── <script>.py
 ├── requirements.txt      # Python deps (optional — only when using pip install -r)
+├── .env                  # API keys and secrets (gitignored)
+├── .env.example          # Placeholder values to document required vars
 └── <data-files>          # Anything the skill reads/writes at runtime
                           # e.g. todo.db, devices.json, memory.yml, token.json
 ```
@@ -74,6 +76,31 @@ $HOME/.openclaw/skills/<skill-name>/.venv/bin/python3 \
 
 > Skills that use stdlib only (no third-party packages) skip the venv entirely and call `python3` directly.
 
+## Environment variables
+
+API keys and secrets are stored in a `.env` file at the skill root and loaded at runtime via `python-dotenv`. Scripts resolve the skill directory from their own path so no hardcoded paths are needed:
+
+```python
+from pathlib import Path
+
+_SKILL_DIR = Path(__file__).resolve().parent.parent  # scripts/ -> skill root
+
+def _load_dotenv() -> None:
+    try:
+        from dotenv import load_dotenv
+        env_file = _SKILL_DIR / ".env"
+        if env_file.exists():
+            load_dotenv(env_file)
+    except ImportError:
+        pass
+```
+
+Call `_load_dotenv()` at the top of any function that reads an env var. If `python-dotenv` is not installed the function silently no-ops and the script falls back to whatever is already in the environment.
+
+- Add `python-dotenv` to `requirements.txt`
+- Provide a `.env.example` with placeholder values
+- Add `.env` to `.gitignore` — never commit secrets
+
 ## Scripts
 
 - Live in `scripts/` relative to the skill root.
@@ -91,6 +118,7 @@ Add per-skill gitignore entries for generated/runtime files:
 
 ```
 skills/<skill-name>/.venv/
+skills/<skill-name>/.env
 skills/<skill-name>/token.json
 skills/<skill-name>/*.db
 ```
