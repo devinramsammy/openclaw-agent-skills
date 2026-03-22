@@ -31,3 +31,7 @@ Add, list, complete, reopen, and delete todos stored in a local SQLite database.
 ## [restaurant-ratings](skills/restaurant-ratings)
 
 Find restaurants with a 4.5+ Yelp rating by zipcode, city, or address.
+
+## [hevy-workout-analysis](skills/hevy-workout-analysis)
+
+Latest Hevy workout: per-lift history (last five) and next session progression.
