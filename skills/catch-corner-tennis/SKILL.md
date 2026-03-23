@@ -36,7 +36,7 @@ Aliases: `cunningham` → 1253, `alley-pond` / `alleypond` → 922, `mccarren` /
 ## Weeks and time
 
 - The script loads data in **UTC week** slices (Sunday `00:00` UTC through the next Sunday `00:00` UTC). Map “this week” / ranges to `--week-start` or `--from` / `--to` accordingly.
-- **Output** lists slots **grouped by calendar day** (America/New_York). Each line is **court name** and **start–end time** in Eastern (abbreviation is **EDT** or **EST** depending on DST).
+- **Output** is **compact Eastern** (America/New_York): short weekday + month + day (`Mon Mar 23`), then one line per venue with **comma-separated** ranges like `9:30 AM – 1 PM` (no “Tennis” in names).
 
 ## Filter range (optional)
 
@@ -69,7 +69,7 @@ $HOME/.openclaw/skills/catch-corner-tennis/.venv/bin/python3 \
 
 ## Output
 
-The script prints **only** a **plain-text list**: days as headings, then indented lines `Court name  start – end` with Eastern times.
+The script prints **only** a **plain-text list**: compact day headers, then `Venue: range, range, …` (short venue names, 12-hour times with **AM** / **PM**).
 
 **Reply with exactly that list** — paste the script stdout into **one fenced code block** (triple backticks). Do **not** add a “Notes” section, bullets, explanations, or any text before or after the block unless the user asks. Do **not** output JSON.
 
@@ -77,11 +77,12 @@ Example shape (script stdout only):
 
 ````markdown
 ```
-Saturday, March 29, 2026
-  Cunningham Tennis  6:00 AM EDT – 8:00 AM EDT
-  Cunningham Tennis  3:00 PM EDT – 4:00 PM EDT
+Mon Mar 23
+Alley Pond: 9:30 AM – 1 PM, 1:30 PM – 4:30 PM, 9 PM – 10 PM
+Cunningham: 2 PM – 3 PM, 11 PM – 12 AM
 
-Sunday, March 30, 2026
-  Cunningham Tennis  6:00 AM EDT – 6:00 PM EDT
+Tue Mar 24
+Cunningham: 6 AM – 7:30 AM, 3 PM – 5 PM, 10 PM – 12 AM
+Alley Pond: 8 AM – 7 PM
 ```
 ````

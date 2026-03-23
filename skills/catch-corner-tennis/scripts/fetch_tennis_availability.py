@@ -41,6 +41,13 @@ ARENA_ALIASES: dict[str, int] = {
 # All configured arenas (order: Cunningham, Alley Pond, McCarren).
 ALL_ARENA_IDS: list[int] = [1253, 922, 1039]
 
+# Short labels for stdout (no "Tennis", no timezone suffixes).
+SHORT_ARENA_NAMES: dict[int, str] = {
+    1253: "Cunningham",
+    922: "Alley Pond",
+    1039: "McCarren",
+}
+
 QUICK_VIEW_PATH_ID = 20
 
 POST_BODY_TEMPLATE: dict[str, Any] = {
@@ -101,13 +108,21 @@ def parse_slot_datetime(raw: str) -> datetime:
     return dt.replace(tzinfo=NY_TZ)
 
 
-def format_eastern_clock(dt: datetime) -> str:
-    """12-hour time with America/New_York abbreviation (EDT or EST)."""
+def _compact_clock(dt: datetime) -> str:
+    """12-hour wall time in America/New_York; hour only if :00, else h:mm; always AM/PM."""
     dt = dt.astimezone(NY_TZ)
     h12 = dt.hour % 12
     if h12 == 0:
         h12 = 12
-    return f"{h12}:{dt.strftime('%M')} {dt.strftime('%p')} {dt.strftime('%Z')}"
+    m = dt.minute
+    ap = dt.strftime("%p")
+    if m == 0:
+        return f"{h12} {ap}"
+    return f"{h12}:{m:02d} {ap}"
+
+
+def _compact_range(start: datetime, end: datetime) -> str:
+    return f"{_compact_clock(start)} – {_compact_clock(end)}"
 
 
 def slot_overlaps_filter(
@@ -182,27 +197,36 @@ def fetch_week(
 
 
 def format_grouped_by_day(rows: list[dict[str, Any]]) -> str:
-    """Group slots by local calendar day (America/New_York); court name + Eastern time range only."""
-    by_day: dict[date, list[tuple[datetime, datetime, str]]] = defaultdict(list)
+    """Group by local day, then by arena: one line per arena, comma-separated compact ranges."""
+    by_day: dict[date, dict[int, list[tuple[datetime, datetime]]]] = defaultdict(
+        lambda: defaultdict(list)
+    )
     for row in rows:
-        name = row["arenaName"]
+        aid = row["arenaId"]
         try:
             s = parse_slot_datetime(row["startDate"])
             e = parse_slot_datetime(row["endDate"])
         except ValueError:
             continue
         day_key = s.astimezone(NY_TZ).date()
-        by_day[day_key].append((s, e, name))
+        by_day[day_key][aid].append((s, e))
 
     if not by_day:
         return "(no slots)"
 
     out: list[str] = []
     for d in sorted(by_day.keys()):
-        label_dt = datetime(d.year, d.month, d.day, tzinfo=NY_TZ)
-        out.append(label_dt.strftime("%A, %B %d, %Y"))
-        for s, e, name in sorted(by_day[d], key=lambda t: (t[0], t[2])):
-            out.append(f"  {name}  {format_eastern_clock(s)} – {format_eastern_clock(e)}")
+        label = datetime(d.year, d.month, d.day, tzinfo=NY_TZ).strftime("%a %b ") + str(d.day)
+        out.append(label)
+        arenas_here = sorted(
+            by_day[d].keys(),
+            key=lambda i: SHORT_ARENA_NAMES.get(i, f"id{i}"),
+        )
+        for aid in arenas_here:
+            label_name = SHORT_ARENA_NAMES.get(aid, f"Arena {aid}")
+            slots = sorted(by_day[d][aid], key=lambda t: t[0])
+            parts = [_compact_range(s, e) for s, e in slots]
+            out.append(f"{label_name}: {', '.join(parts)}")
         out.append("")
     return "\n".join(out).rstrip()
 
