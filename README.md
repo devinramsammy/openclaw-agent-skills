@@ -35,3 +35,7 @@ Find restaurants with a 4.5+ Yelp rating by zipcode, city, or address.
 ## [hevy-workout-analysis](skills/hevy-workout-analysis)
 
 Latest Hevy workout: per-lift history (last five) and next session progression.
+
+## [catch-corner-tennis](skills/catch-corner-tennis)
+
+Fetch NYC public tennis rental availability from Catch Corner (Cunningham, Alley Pond, McCarren), grouped by day with Eastern times.
