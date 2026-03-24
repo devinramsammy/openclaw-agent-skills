@@ -32,6 +32,10 @@ Add, list, complete, reopen, and delete todos stored in a local SQLite database.
 
 Find restaurants with a 4.5+ Yelp rating by zipcode, city, or address.
 
+## [planning-tj-meals](skills/planning-tj-meals)
+
+Generates Trader Joe's meal plans and grocery lists from the repo product database via query_products.py; supports day counts, meal types (breakfast, lunch, dinner), and dietary preferences.
+
 ## [hevy-workout-analysis](skills/hevy-workout-analysis)
 
 Latest Hevy workout: per-lift history (last five) and next session progression.

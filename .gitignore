@@ -12,3 +12,6 @@ skills/hevy-workout-analysis/.venv/
 skills/hevy-workout-analysis/scripts/__pycache__/
 skills/catch-corner-tennis/.venv/
 skills/catch-corner-tennis/scripts/__pycache__/
+skills/planning-tj-meals/.venv/
+skills/planning-tj-meals/.env
+skills/planning-tj-meals/scripts/__pycache__/
